@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WasteGraph – Collecte des déchets</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>WasteGraph – Collecte des déchets</h1>
+        </header>
+
+        <div class="main-content">
+            <!-- Partie gauche : Contrôles -->
+            <div class="sidebar">
+                <!-- Section Colorier -->
+                <div class="control-section">
+                    <h2>Colorier (jours/équipes)</h2>
+                    <div class="form-group">
+                        <button class="btn-primary" onclick="colorGraph()">Colorier</button>
+                    </div>
+                </div>
+
+                <!-- Section Dijkstra -->
+                <div class="control-section">
+                    <h2>Dijkstra</h2>
+                    <div class="form-group">
+                        <label>Source:</label>
+                        <select id="startNode">
+                            <option value="">Sélectionner</option>
+                        </select>
+                        
+                        <label>Destination:</label>
+                        <select id="endNode">
+                            <option value="">Sélectionner</option>
+                        </select>
+                        
+                        <button class="btn-primary" onclick="findShortestPath()">Dijkstra</button>
+                    </div>
+                </div>
+
+                <!-- Légende -->
+                <div class="control-section">
+                    <h2>Légende</h2>
+                    <div id="colorLegend" class="legend-container">
+                        <p>Sélectionnez "Colorier" pour voir la légende</p>
+                    </div>
+                </div>
+
+                <!-- Résultats -->
+                <div class="control-section">
+                    <h2>Résultats</h2>
+                    <div id="results" class="results-container">
+                        <p>Aucun résultat à afficher</p>
+                    </div>
+                </div>
+
+                <!-- Gestion des Contraintes -->
+                <div class="control-section">
+                    <h2>Gestion des Contraintes</h2>
+                    <div class="form-group">
+                        <label>Sommet A:</label>
+                        <select id="constraintNodeA">
+                            <option value="">Sélectionner</option>
+                        </select>
+                        
+                        <label>Sommet B:</label>
+                        <select id="constraintNodeB">
+                            <option value="">Sélectionner</option>
+                        </select>
+                        
+                        <input type="number" id="constraintValue" placeholder="Valeur de la contrainte" step="0.1" min="0">
+                        
+                        <div class="button-group">
+                            <button onclick="addConstraint()">Ajouter Contrainte</button>
+                            <button onclick="removeConstraint()">Supprimer Contrainte</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gestion des Sommets -->
+                <div class="control-section">
+                    <h2>Gestion des Sommets</h2>
+                    <div class="form-group">
+                        <input type="text" id="nodeId" placeholder="ID du sommet">
+                        <input type="number" id="nodeX" placeholder="Position X">
+                        <input type="number" id="nodeY" placeholder="Position Y">
+                        <input type="number" id="nodeCapacity" placeholder="Capacité">
+                        
+                        <div class="button-group">
+                            <button onclick="addNode()">Ajouter Sommet</button>
+                            <button onclick="updateNode()">Modifier Sommet</button>
+                            <button onclick="deleteNode()">Supprimer Sommet</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gestion des Arêtes -->
+                <div class="control-section">
+                    <h2>Gestion des Arêtes</h2>
+                    <div class="form-group">
+                        <label>Sommet U:</label>
+                        <select id="edgeU">
+                            <option value="">Sélectionner</option>
+                        </select>
+                        
+                        <label>Sommet V:</label>
+                        <select id="edgeV">
+                            <option value="">Sélectionner</option>
+                        </select>
+                        
+                        <input type="number" id="edgeWeight" placeholder="Poids de l'arête" step="0.1" min="0">
+                        
+                        <div class="button-group">
+                            <button onclick="addEdge()">Ajouter Arête</button>
+                            <button onclick="updateEdge()">Modifier Arête</button>
+                            <button onclick="deleteEdge()">Supprimer Arête</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Partie droite : Graphe -->
+            <div class="graph-area">
+                <div class="graph-container">
+                    <svg id="graphCanvas" width="800" height="600"></svg>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
